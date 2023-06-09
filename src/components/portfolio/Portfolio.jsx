@@ -6,6 +6,8 @@ import { useCursor } from "@hooks/useCursor";
 const Portfolio = () => {
     const { setIsHovering } = useCursor();
 
+    // TODO: Add your own projects
+
   return (
     <section id="portfolio">
       <h5>My Recent Work</h5>
