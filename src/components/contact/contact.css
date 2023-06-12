@@ -55,7 +55,7 @@ textarea {
     background: transparent;
     border: 2px solid var(--color-primary-variant);
     resize: none;
-    color: transparent;
+    color: white;
 }
 
 /* ____________________________ MEDIA QUERIES (MEDIUM DEVICES) ____________________________*/
