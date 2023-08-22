@@ -9,7 +9,7 @@ import { useCursor } from "@hooks/useCursor";
 const Header = () => {
   const { setIsHovering } = useCursor();
   return (
-    <header>
+    <header id="home">
       <div className="container header__container">
         <div className="blob-content">
           <div className="blob">

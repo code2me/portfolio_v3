@@ -1,6 +1,6 @@
 import "react-notifications-component/dist/theme.css";
 import { ReactNotifications } from "react-notifications-component";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "@components/header/Header";
 import Nav from "@components/nav/Nav";
@@ -16,29 +16,56 @@ import { CursorProvider } from "@context/cursorContext";
 const App = () => {
   const { x, y } = useMousePosition();
   const [isHovering, setIsHovering] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
+
+  // Attach a scroll event listener to track the active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "#home",
+        "#about",
+        "#experience",
+        "#portfolio",
+        "#contact",
+      ];
+
+      // Loop through sections to find the active section based on scroll position
+      for (const section of sections) {
+        const element = document.querySelector(section);
+        if (element && window.scrollY >= element.offsetTop - 200) {
+          setActiveSection(section);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <CursorProvider value={{ isHovering, setIsHovering }}>
-        <div className="App">
-          <div className="containerCursor">
-            <div
-              style={{
-                transform: `translate3d(${x}px, ${y}px, 0)`,
-              }}
-              className="wrapperCursor"
-            >
-              <Cursor isHovering={isHovering} />
-            </div>
+      <div className="App">
+        <div className="containerCursor">
+          <div
+            style={{
+              transform: `translate3d(${x}px, ${y}px, 0)`,
+            }}
+            className="wrapperCursor"
+          >
+            <Cursor isHovering={isHovering} />
           </div>
-          <ReactNotifications />
-          <Header />
-          <Nav />
-          <About />
-          <Experience />
-          <Portfolio />
-          <Contact />
-          <Footer />
         </div>
+        <ReactNotifications />
+        <Header />
+        <Nav activeNav={activeSection} setActiveNav={setActiveSection} />
+        <About />
+        <Experience />
+        <Portfolio />
+        <Contact />
+        <Footer />
+      </div>
     </CursorProvider>
   );
 };

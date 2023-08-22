@@ -3,21 +3,19 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BiUserCircle, BiMessageSquareDetail } from "react-icons/bi";
 import {BsCodeSlash} from 'react-icons/bs'
 import {MdWorkOutline} from 'react-icons/md'
-import {useState} from 'react'
 import { useCursor } from "@hooks/useCursor";
 
 
-const Nav = () => {
-  const [activeNav, setActiveNav] = useState('#');
-    const { setIsHovering } = useCursor();
+const Nav = ({ activeNav, setActiveNav }) => {
+  const { setIsHovering } = useCursor();
 
   return (
     <nav>
       <a
         aria-label="Home"
-        href="#"
-        onClick={() => setActiveNav("#")}
-        className={activeNav === "#" ? "active" : ""}
+        href="#home"
+        onClick={() => setActiveNav("#home")}
+        className={activeNav === "#home" ? "active" : ""}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -65,6 +63,6 @@ const Nav = () => {
       </a>
     </nav>
   );
-}
+};
 
 export default Nav
